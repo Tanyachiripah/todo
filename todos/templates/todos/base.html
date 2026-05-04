@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Todo{% endblock %}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #100a28;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fdfdfe;
+            box-shadow: 0 10px 25px rgba(42, 51, 119, 0.264);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #61a4d4 ;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background: #002d6b;
+            color: #c6e3f9 ;
+        }
+
+        .btn-primary:hover {
+            background: #080a18;
+        }
+
+        .btn-danger {
+            background: #da5757;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #761a1a;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #01873f;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #82b9f5;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #030b30;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

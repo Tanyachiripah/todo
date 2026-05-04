@@ -1,0 +1,88 @@
+{% extends 'todos/base.html' %}
+{% block title %}Todos{% endblock %}
+{% block extra_css %}
+<style>
+    .todo-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border: 1px solid #00a2ff;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background: #91d2fa;
+    }
+
+    .todo-item.completed {
+        background:#253f7c;
+        opacity: 0.9;
+    }
+
+    .todo-content {
+        flex: 1;
+        cursor: pointer;
+    }
+
+    .todo-item.completed .title {
+        text-decoration: line-through;
+        color: #00ff04;
+    }
+
+    .title {
+        font-weight: bold;
+        color: #3785d8;
+    }
+
+    .description {
+        font-size: 12px;
+        color: #080819;
+        margin-top: 5px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .empty {
+
+        text-align: center;
+        color: #61a4d4;
+        padding: 30px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1>✓ My Todos</h1>
+<a href="{% url 'todo_create' %}" class="btn btn-primary">
+    ■ Add New Todo
+</a>
+<div style="margin-top: 20px;">
+    {% if todos %}
+    {% for todo in todos %}
+    <div class="todo-item {% if todo.completed %}completed{% endif %}">
+        <form method="post" action="{% url 'todo_toggle' todo.id %}" style="display:inline;" class="todo-content">
+            {% csrf_token %}
+            <button type="submit" style="background:none;border:none;cursor:pointer;">
+                <div>
+                    <span class="title">
+                        {% if todo.completed %}✓{% endif %} {{ todo.title }}
+                    </span>
+                    {% if todo.description %}
+                    <div class="description">{{ todo.description }}</div>
+                    {% endif %}
+                </div>
+            </button>
+        </form>
+        <div class="actions">
+            <a href="{% url 'todo_delete' todo.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+      {% else %}
+    <div class="empty">
+        <p>No todos yet! Add one to get started.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
